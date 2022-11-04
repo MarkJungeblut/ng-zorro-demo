@@ -1,0 +1,37 @@
+<ng-container *ngIf="params$ | async as params">
+  <nz-table
+    #exampleTable
+    [nzData]="params.examples"
+    nzTableLayout="fixed"
+    [nzPageSize]="30"
+    [nzVirtualItemSize]="30"
+    [nzVirtualForTrackBy]="trackByIndex"
+    [nzFrontPagination]="true"
+    [nzShowPagination]="true"
+    [nzPaginationPosition]="'bottom'"
+    class="clickable"
+  >
+    <thead>
+    <tr>
+      <th
+        *ngFor="let column of params.columnItems; trackBy: trackByColumn"
+        [nzSortOrder]="column.sortOrder"
+        [nzSortFn]="column.sortFn"
+        [nzFilters]="column.listOfFilter"
+        [nzFilterFn]="column.filterFn"
+        [nzWidth]="column.width"
+      >
+        {{ column.name }}
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let example of getTypedExampleData(exampleTable.data); trackBy: trackByExample"
+          (click)="onExampleSelect(example)">
+        <td [nzEllipsis]="true" [title]="example.title">{{ example.title }}</td>
+        <td [nzEllipsis]="true" [title]="example.description">{{ example.description }}</td>
+        <td [nzEllipsis]="true" [title]="example.comment">{{ example.comment }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</ng-container>

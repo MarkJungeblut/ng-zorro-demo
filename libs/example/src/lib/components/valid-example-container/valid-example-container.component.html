@@ -1,0 +1,23 @@
+<ng-container *ngIf="exampleData$ | async as exampleData">
+  <ng-container *ngIf="isSuccess(exampleData)">
+    <example [params]="exampleData.value" (exampleSelected)="onExampleSelected($event)"></example>
+  </ng-container>
+
+  <ng-container *ngIf="isPending(exampleData)">
+
+    <nz-spin nzSimple [nzSize]="'large'" [nzIndicator]="indicatorTemplate"></nz-spin>
+
+    <ng-template #indicatorTemplate>
+      <span class="custom-spinner" nz-icon nzType="loading" nzTheme="outline"></span>
+    </ng-template>
+  </ng-container>
+
+  <ng-container *ngIf="isFailure(exampleData)">
+    <nz-result nzStatus="error" [nzTitle]="'Error while loading data'"></nz-result>
+
+    <ng-container *ngFor="let error of exampleData.error">
+      {{error}}
+    </ng-container>
+  </ng-container>
+
+</ng-container>

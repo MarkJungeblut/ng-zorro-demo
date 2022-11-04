@@ -1,0 +1,308 @@
+@import '../../../node_modules/ng-zorro-antd/ng-zorro-antd.less'; // TODO: check periodically if path '~ng-zorro-antd/ng-zorro-antd.less' works again. Was broken with ng-zorro update to v13.2.2.
+
+// -------- override less var -----------
+@primary-color: #7375a4;
+
+// Menu overrides
+@menu-bg: #f9f9f9; // --light
+@menu-item-active-bg: #e8e8e8;
+@menu-item-color: #7375a4;
+@menu-highlight-color: #474a81;
+
+.@{badge-prefix-cls} {
+	&-count {
+		height: 16px;
+		font-family: var(--font-family-medium);
+		font-size: 10px;
+		line-height: 16px;
+		max-width: 30px;
+	}
+
+	&-multiple-words {
+		padding: 0 4px;
+	}
+}
+
+.@{menu-prefix-cls} {
+	&-submenu {
+		&-inline {
+			.@{menu-prefix-cls}-submenu-title {
+				padding-right: 12px;
+			}
+
+			> .@{menu-prefix-cls}-submenu-title .@{menu-prefix-cls}-submenu-arrow {
+				left: 12px;
+				transform: rotate(-90deg) translateX(2px) translateY(-2px);
+			}
+		}
+
+		&-open {
+			&.@{menu-prefix-cls}-submenu-inline > .@{menu-prefix-cls}-submenu-title .@{menu-prefix-cls}-submenu-arrow {
+				&::after {
+					transform: rotate(45deg) translateY(2px);
+				}
+
+				&::before {
+					transform: rotate(-45deg) translateY(2px);
+				}
+			}
+		}
+	}
+}
+
+.ant-menu-inline.ant-menu-root .ant-menu-item > *,
+.ant-menu-inline.ant-menu-root .ant-menu-submenu-title > * {
+	flex: 100%; // Override `flex: none;` from ./node_modules/ng-zorro-antd/style/color/tinyColor.less for ng-zorro-antd >=12 #PPF-2155
+}
+
+// Badge overrides
+.@{badge-prefix-cls} {
+	&-count {
+		box-shadow: none;
+	}
+}
+
+// menu height 36px minus 2px to display small border line below ata number and ata title
+@menu-inline-toplevel-item-height: 36px;
+.@{menu-prefix-cls} {
+	&-vertical,
+	&-vertical-left,
+	&-vertical-right,
+	&-inline {
+		> .@{menu-prefix-cls}-item,
+		> .@{menu-prefix-cls}-submenu > .@{menu-prefix-cls}-submenu-title {
+			height: @menu-inline-toplevel-item-height;
+			line-height: @menu-inline-toplevel-item-height - 2px;
+		}
+	}
+}
+
+//menu item height 36px and no offset between items
+@menu-item-height: 36px;
+@menu-item-vertical-margin: 0px;
+@menu-item-boundary-margin: 0px;
+
+//menu-item hover highlight
+.@{menu-prefix-cls} {
+	&-item:hover {
+		color: #474a81;
+		background-color: #f2f2f2;
+	}
+
+	&-item,
+	&-submenu-title {
+		transition: background 0s @ease-in-out;
+	}
+}
+
+// disable menu active background
+.@{menu-prefix-cls} {
+	&-submenu-title:active {
+		background: none;
+	}
+}
+
+// disable menu hover highlight
+.@{menu-prefix-cls} {
+	&-submenu-title:hover {
+		color: #333436;
+		font-weight: normal;
+	}
+
+	&-submenu-title {
+		color: #333436;
+		font-weight: normal;
+	}
+}
+
+// increase menu item selected border and change color
+@menu-item-active-border-width: 4px;
+.@{menu-prefix-cls} {
+	&-vertical,
+	&-vertical-left,
+	&-vertical-right,
+	&-inline {
+		.@{menu-prefix-cls}-item {
+			&::after {
+				border-right-color: #7375a4;
+			}
+		}
+	}
+}
+
+.ant-radio-button-wrapper-checked .ant-spin-dot-item {
+	background-color: #ffffff;
+}
+
+// vertical center a spinner within a radio button group
+nz-radio-group .ant-spin-spinning,
+.spinVerticalCentered .ant-spin-spinning {
+	display: inline-flex;
+}
+
+// Form item
+.ant-form-item {
+	.ant-form-item-label {
+		> label {
+			color: var(--color-menu-lvl1-label-primary);
+			font-family: var(--font-family-medium);
+
+			&::after {
+				content: ''; // Override content: ':'
+			}
+		}
+	}
+
+	.ant-select {
+		color: var(--color-menu-lvl1-label-primary);
+	}
+
+	.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+		border-color: var(--gray-medium);
+	}
+
+	.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+		box-shadow: none;
+		border-color: var(--color-menu-lvl1-label-secondary);
+	}
+
+	.ant-select-single.ant-select-open .ant-select-selection-item {
+		color: currentColor;
+	}
+
+	.ant-select-arrow .anticon > svg {
+		fill: var(--color-icon-foreground);
+	}
+
+	.ant-select-item {
+		color: var(--color-menu-lvl1-label-primary);
+	}
+
+	.ant-checkbox-wrapper {
+		color: var(--color-icon-foreground);
+	}
+}
+
+// Select dropdown
+
+@select-dropdown-border-radius: 2px;
+@select-dropdown-bg-color: var(--white, #fff);
+@select-dropdown-border-color: var(
+	--gray-medium,
+	#d8d8d8
+); // ⚠️ #e8e8e8 will not get rendered as .ant-select-dropdown's border-color !? #PPF-2380
+@select-item-border-color: var(--mercury, #e8e8e8);
+@select-item-group-bg-color: var(--alabaster, #fafafa);
+@select-item-group-hover-bg-color: @select-item-group-bg-color;
+@select-item-group-color: var(--shark, #333436);
+@select-item-option-bg-color: @select-dropdown-bg-color;
+@select-item-option-selected-bg-color: #f1f1f6;
+@select-item-option-hover-bg-color: #f6f6f9;
+@select-item-option-color: var(--purple-dark, #474a81);
+
+
+.ant-select-dropdown {
+	margin-top: 0;
+	margin-bottom: 0;
+	background-color: @select-dropdown-bg-color;
+	padding: 0;
+	border-right: 1px solid @select-dropdown-border-color;
+	border-bottom: 1px solid @select-dropdown-border-color;
+	border-left: 1px solid @select-dropdown-border-color;
+	border-bottom-right-radius: @select-dropdown-border-radius;
+	border-bottom-left-radius: @select-dropdown-border-radius;
+}
+
+.ant-select-dropdown > div {
+}
+
+.cdk-virtual-scroll-viewport {
+}
+
+.cdk-virtual-scroll-content-wrapper {
+}
+
+.ant-select-item {
+	padding: 5px 10px;
+
+	.filter-icon {
+		margin-right: 5px; // Label has leading ' '
+	}
+}
+
+.ant-select-item-group {
+	cursor: pointer;
+	user-select: none;
+	padding: 4px 10px;
+	border-top: 1px solid transparent;
+	background-color: @select-item-group-bg-color;
+	color: @select-item-group-color;
+	text-transform: uppercase;
+	font-weight: 700;
+
+	.ant-select-item-option + & {
+		border-top-color: @select-item-border-color;
+	}
+
+	&:not(:last-child) {
+		border-bottom: 1px solid @select-item-border-color;
+	}
+
+	&:hover {
+		background-color: @select-item-group-hover-bg-color;
+	}
+
+	.filter-icon {
+		// font-size: .875rem;	// Parent has smaller font-size 12px
+		margin-right: 8px; // Label has leading ' '
+		font-weight: normal;
+	}
+}
+
+.selected-option-group {
+	max-height: 22px; // Hack vs. height issue w/ .mdi
+}
+
+.ant-select-item-option-disabled {
+	display: none;
+}
+
+.ant-select-item-option {
+	background-color: @select-item-option-bg-color;
+	color: @select-item-option-color;
+	max-height: 22px; // Hack vs. height issue w/ .mdi
+}
+
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+	background-color: @select-item-option-selected-bg-color;
+	color: @select-item-option-color;
+	font-weight: bold;
+}
+
+.ant-select-dropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+	// Also keyboard control
+	background-color: @select-item-option-hover-bg-color;
+}
+
+// Popover - suppress popover-inner-content, just utilize popover-title
+// Apply like [nzPopoverOverlayClassName]="'insights-popover-no-content'"
+.ant-popover.insights-popover-no-content {
+	.ant-popover-title {
+		border-bottom: none;
+	}
+
+	.ant-popover-inner-content {
+		display: none;
+	}
+}
+
+.ant-tabs-content-holder {
+	display: flex;
+}
+
+.ant-tabs-top > .ant-tabs-nav,
+.ant-tabs-bottom > .ant-tabs-nav,
+.ant-tabs-top > div > .ant-tabs-nav,
+.ant-tabs-bottom > div > .ant-tabs-nav {
+	margin-bottom: 0;
+}

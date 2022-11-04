@@ -1,0 +1,7 @@
+nz-table {
+  &.clickable {
+    .ant-table-row {
+      cursor: pointer;
+    }
+  }
+}

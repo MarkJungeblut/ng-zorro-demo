@@ -1,0 +1,20 @@
+<ng-container *ngIf="exampleData$ | async as exampleData">
+  <ng-container *ngIf="isSuccess(exampleData)">
+  </ng-container>
+
+  <ng-container *ngIf="isPending(exampleData)">
+    <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+  </ng-container>
+
+  <ng-container *ngIf="isFailure(exampleData)">
+    <nz-result nzStatus="error" [nzTitle]="'Failed retrieving examples'" ></nz-result>
+
+    <div nz-result-content>
+      <ng-container *ngFor="let error of exampleData.error">
+        {{error}}
+      </ng-container>
+    </div>
+
+  </ng-container>
+
+</ng-container>

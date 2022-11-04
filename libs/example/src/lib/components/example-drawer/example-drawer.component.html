@@ -1,0 +1,18 @@
+<ng-container *ngIf="example$ | async as example">
+  <nz-card nzTitle='{{example.title}}'>
+    <nz-descriptions [nzBordered]='true' [nzLayout]="'horizontal'" [nzSize]="'small'" [nzColumn]='1'>
+      <nz-descriptions-item nzTitle='Description'>
+        {{example.description}}
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle='Comment'>
+        {{example.comment}}
+      </nz-descriptions-item>
+    </nz-descriptions>
+  </nz-card>
+
+  <nz-form-control *nzModalFooter>
+    <button nz-button nzType='primary' (click)='onSaveClick()'>
+      Ok
+    </button>
+  </nz-form-control>
+</ng-container>
